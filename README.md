@@ -1,5 +1,9 @@
 # Neo4j
 
+## 开启
+
+> $ neo4j.bat console
+
 ## 配置
 
 - 初始账户：neo4j
@@ -12,11 +16,11 @@
 
 统计根节点数
 
-> match (n) where not ()-->(n) return count(distinct n)
+> $ match (n) where not ()-->(n) return count(distinct n)
 
 统计叶节点数
 
-> MATCH (n) RETURN count(*)
+> $ MATCH (n) RETURN count(*)
 
 ### 添加
 
@@ -51,6 +55,10 @@
 按照关系查询(根据限制)
 
 > $ match R = (p1:华山) - [r:师徒] ->(p2) where p1.name="岳不群" and p2.name="令狐冲" return R;
+
+通过id查询
+
+> $ match (r) where id(r)=6 return r
 
 ### 更新
 
@@ -88,6 +96,17 @@
 > $ match (n) detach delete n
 
 ## neo4j-python操作
+
+**安装库**
+
+> $ pip install neo4j-driver
+
+**引入**
+
+```python
+from neo4j import GraphDatabase
+driver = GraphDatabase.driver(uri="bolt://localhost:7687", auth=("neo4j", "******"), encrypted=False)
+```
 
 ### 添加
 
